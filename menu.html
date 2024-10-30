@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"    
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(to right, #5a5e64, rgb(180, 169, 142));
+}
+.sidebar {
+  position: fixed;
+  width: 78px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to top right, rgb(84, 63, 12), #5a5e64);
+  padding: 6px 14px;
+  transition: all 0.5s ease;
+}
+
+.sidebar .logo_content .logo {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  color: #1f1e25;
+
+  opacity: 0;
+  pointer-events: none;
+}
+.logo_content .logo i {
+  font-size: 28px;
+  margin-right: 5px;
+}
+.logo_content .logo .logo_name {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.sidebar #btn {
+  position: absolute;
+  color: #17161d;
+  left: 50%;
+  top: 6px;
+  font-size: 20px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  transform: translateX(-50%);
+}
+
+.sidebar ul {
+  margin-top: 20px;
+}
+.sidebar ul li {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin: 0 5px;
+  list-style: none;
+  line-height: 50px;
+}
+.sidebar ul li a {
+  color: #d9d1ff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: all 0.2s ease-in;
+  white-space: nowrap;
+}
+
+.sidebar ul li i {
+  height: 50px;
+  min-width: 50px;
+  border-radius: 12px;
+  line-height: 50px;
+  text-align: center;
+}
+.sidebar ul li a:hover {
+  color: #000;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.25);
+}
+.sidebar ul li input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: linear-gradient(to right, #c7b7c07a, #423d07);
+  padding-left: 50px;
+  font-size: 18px;
+  color: #1f1e25;
+}
+
+.sidebar ul li .bx-search {
+  position: absolute;
+  z-index: 99;
+  color: #d9d1ff;
+  font-size: 22px;
+  transition: all 0.5s ease-in;
+}
+
+/* Profile Content */
+
+.sidebar .profile_content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #1f1e25;
+  width: 100%;
+}
+.sidebar .profile_content .profile {
+  position: relative;
+  padding: 10px 6px;
+  height: 60px;
+  background: none;
+  transition: all 0.4s ease-in;
+}
+.profile_content .profile .profile_details {
+  display: flex;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+}
+.profile_details img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.profile .profile_details .name_job {
+  margin-left: 15px;
+}
+.profile .profile_details .name {
+  font-size: 15px;
+  font-weight: 400;
+}
+.profile .profile_details .job {
+  font-size: 12px;
+}
+
+.profile #log_out {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  min-width: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.4s ease;
+  background: linear-gradient(to right, #c7b7c07a, #433f10);
+}
+
+.home_content {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 76px);
+  left: 76px;
+  transition: all 0.5s ease;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+}
+
+.home_content .text {
+  font-size: 25px;
+  font-weight: 600;
+  color: #1f1e25;
+  margin: 0px;
+  padding: 0px;
+}
+.sidebar ul li .tooltip {
+  position: absolute;
+  left: 122px;
+  top: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  height: 35px;
+  width: 122px;
+  background: rgba(255, 255, 255, 0.4);
+  line-height: 35px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: 0s;
+  opacity: 0;
+  pointer-events: none;
+  display: block;
+}
+.sidebar ul li:hover .tooltip {
+  transition: all 0.3s ease;
+  top: 50%;
+  opacity: 1;
+}
+
+.sidebar.active {
+  width: 240px;
+}
+.sidebar.active .logo_content .logo {
+  opacity: 1;
+  pointer-events: none;
+}
+
+.sidebar.active #btn {
+  left: 90%;
+}
+.sidebar ul li .bx-search:hover {
+  background: #fff;
+  color: #1f1e25;
+}
+
+.sidebar.active ul li .tooltip {
+  display: none;
+}
+.sidebar .links_name {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+.sidebar.active .links_name {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar.active .profile .profile_details {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar.active .profile #log_out {
+  left: 88%;
+}
+.sidebar.active ~ .home_content {
+  width: calc(100% - 240px);
+  left: 240px;
+}
+
+.sidebar.active .profile_content .profile {
+  background: linear-gradient(to right, #9869127a, #969664);
+}
+.sidebar.active .profile #log_out {
+  background: none;
+}
+.logo_content .bx-menu:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/* ---------------QL Thuc Don------------------ */
+      /* Style cho menu form */
+/* Thêm style cho container chung */
+.detail-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 2px solid #000;
+}
+
+/* CSS cho phần bảng danh sách */
+.list-table {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  border: 2px solid #000;
+}
+
+/* CSS cho tiêu đề trong các phần */
+.detail-form h3,
+.list-table h3 {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+/* CSS cho bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* CSS cho các input và button */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* CSS cho nút xóa trong bảng */
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* CSS cho phần lọc */
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section input,
+.filter-section select {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+    </style>
+    <title>CoffeeShopr</title>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo_content">
+        <div class="logo">
+          <i class="bx bx-coffee"></i>
+          <div class="logo_name">CoffeeShop</div>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav_list">
+        <li>
+          <i class="bx bx-search"></i>
+          <input type="text" placeholder="Search..." />
+          <span class="tooltip">Search</span>
+        </li>
+        <li>
+          <a href="index.html">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Thống kê</span>
+          </a>
+          <span class="tooltip">Thống kê</span>
+        </li>
+        <li>
+          <a href="menu.html">
+            <i class="bx bx-food-menu"></i>
+            <span class="links_name">QL Thực đơn</span>
+          </a>
+          <span class="tooltip">QL Thực đơn</span>
+        </li>
+        <li>
+          <a href="nhanvien.html">
+            <i class="bx bxs-group"></i>
+            <span class="links_name">QL Nhân viên</span>
+          </a>
+          <span class="tooltip">QL Nhân Viên</span>
+        </li>
+        <li>
+          <a href="calam.html">
+            <i class="bx bx-task"></i>
+            <span class="links_name">QL Ca làm</span>
+          </a>
+          <span class="tooltip">QL Ca làm</span>
+        </li>
+        <li>
+          <a href="caidat.html">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Cài đặt</span>
+          </a>
+          <span class="tooltip">Cài đặt</span>
+        </li>
+      </ul>
+  
+      <div class="profile_content">
+        <div class="profile">
+          <div class="profile_details">
+            <img src="./img/profile.jpg" alt="" />
+            <div class="name_job">
+              <div class="name">Username</div>
+              <div class="job">Quản lí</div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </div>
+      </div>
+    </div>
+  
+    <div class="home_content">
+      <div class="text">Quản lí Thực đơn</div>
+      
+      <!-- Form thông tin chi tiết -->
+      <div class="detail-form">
+        <h3>Thông tin chi tiết món</h3>
+        <div class="form-group">
+          <label>Mã món:</label>
+          <input type="text" id="maMon" placeholder="Nhập mã món">
+        </div>
+        <div class="form-group">
+          <label>Tên món:</label>
+          <input type="text" id="tenMon" placeholder="Nhập tên món">
+        </div>
+        <div class="form-group">
+          <label>Đơn giá:</label>
+          <input type="number" id="donGia" placeholder="Nhập đơn giá">
+        </div>
+        <div class="form-group">
+          <label>Danh mục:</label>
+          <select id="danhMuc">
+            <option value="">Chọn danh mục</option>
+            <option value="cafe">Cà phê</option>
+            <option value="tra">Trà</option>
+            <option value="banh">Bánh</option>
+            <option value="nuocep">Nước ép</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button class="btn-add" onclick="themMon()">Thêm món</button>
+          <button class="btn-edit" onclick="suaMon()">Chỉnh sửa</button>
+          <button class="btn-delete" onclick="xoaMon()">Xóa món</button>
+        </div>
+      </div>
+  
+      <!-- Bảng danh sách -->
+      <div class="list-table">
+        <h3>Danh sách món</h3>
+        <div class="filter-group">
+          <input type="text" id="filterMa" placeholder="Lọc theo mã món" onkeyup="filterTable()">
+          <input type="text" id="filterTen" placeholder="Lọc theo tên món" onkeyup="filterTable()">
+          <input type="number" id="filterGia" placeholder="Lọc theo đơn giá" onkeyup="filterTable()">
+          <select id="filterDanhMuc" onchange="filterTable()">
+            <option value="">Tất cả danh mục</option>
+            <option value="cafe">Cà phê</option>
+            <option value="tra">Trà</option>
+            <option value="banh">Bánh</option>
+            <option value="nuocep">Nước ép</option>
+          </select>
+        </div>
+        <table id="menuTable">
+          <thead>
+            <tr>
+              <th>Mã món</th>
+              <th>Tên món</th>
+              <th>Đơn giá</th>
+              <th>Danh mục</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dữ liệu mẫu -->
+            <tr>
+              <td>CF001</td>
+              <td>Cà phê đen</td>
+              <td>25000</td>
+              <td>Cà phê</td>
+              <td>
+                <button class="btn-edit-row" onclick="chonDongChinhSua(this)">
+                  <i class='bx bx-edit'></i>
+                </button>
+                <button class="btn-delete-row" onclick="xoaDong(this)">
+                  <i class='bx bx-trash'></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <script>
+      // Script điều khiển sidebar
+ let btn = document.querySelector("#btn");
+ let sidebar = document.querySelector(".sidebar");
+ let searchBtn = document.querySelector(".bx-search");
+
+ btn.onclick = function() {
+     sidebar.classList.toggle("active");
+ };
+ searchBtn.onclick = function() {
+     sidebar.classList.toggle("active");
+ };
+// Script cho quản lý thực đơn
+function themMon() {
+  const maMon = document.getElementById('maMon').value;
+  const tenMon = document.getElementById('tenMon').value;
+  const donGia = document.getElementById('donGia').value;
+  const danhMuc = document.getElementById('danhMuc').value;
+
+  if(!maMon || !tenMon || !donGia || !danhMuc) {
+    alert('Vui lòng nhập đầy đủ thông tin!');
+    return;
+  }
+
+  const table = document.getElementById('menuTable').getElementsByTagName('tbody')[0];
+  const newRow = table.insertRow();
+  newRow.innerHTML = `
+    <td>${maMon}</td>
+    <td>${tenMon}</td>
+    <td>${donGia}</td>
+    <td>${danhMuc}</td>
+    <td>
+      <button class="btn-edit-row" onclick="chonDongChinhSua(this)">
+        <i class='bx bx-edit'></i>
+      </button>
+      <button class="btn-delete-row" onclick="xoaDong(this)">
+        <i class='bx bx-trash'></i>
+      </button>
+    </td>
+  `;
+
+  // Reset form
+  document.getElementById('maMon').value = '';
+  document.getElementById('tenMon').value = '';
+  document.getElementById('donGia').value = '';
+  document.getElementById('danhMuc').value = '';
+}
+
+function chonDongChinhSua(button) {
+  const row = button.closest('tr');
+  const cells = row.cells;
+
+  document.getElementById('maMon').value = cells[0].textContent;
+  document.getElementById('tenMon').value = cells[1].textContent;
+  document.getElementById('donGia').value = cells[2].textContent;
+  document.getElementById('danhMuc').value = cells[3].textContent;
+}
+
+function suaMon() {
+  const maMon = document.getElementById('maMon').value;
+  const table = document.getElementById('menuTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for(let i = 1; i < rows.length; i++) {
+    if(rows[i].cells[0].textContent === maMon) {
+      rows[i].cells[1].textContent = document.getElementById('tenMon').value;
+      rows[i].cells[2].textContent = document.getElementById('donGia').value;
+      rows[i].cells[3].textContent = document.getElementById('danhMuc').value;
+      break;
+    }
+  }
+}
+
+function xoaMon() {
+  const maMon = document.getElementById('maMon').value;
+  const table = document.getElementById('menuTable');
+  const rows = table.getElementsByTagName('tr');
+  for(let i = 1; i < rows.length; i++) {
+    if(rows[i].cells[0].textContent === maMon) {
+      table.deleteRow(i);
+      break;
+    }
+  }
+
+  // Reset form
+  document.getElementById('maMon').value = '';
+  document.getElementById('tenMon').value = '';
+  document.getElementById('donGia').value = '';
+  document.getElementById('danhMuc').value = '';
+}
+
+function xoaDong(button) {
+  const row = button.closest('tr');
+  row.remove();
+}
+
+function filterTable() {
+  const filterMa = document.getElementById('filterMa').value.toUpperCase();
+  const filterTen = document.getElementById('filterTen').value.toUpperCase();
+  const filterGia = document.getElementById('filterGia').value;
+  const filterDanhMuc = document.getElementById('filterDanhMuc').value.toUpperCase();
+  
+  const table = document.getElementById('menuTable');
+  const tr = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < tr.length; i++) {
+    const tdMa = tr[i].getElementsByTagName('td')[0];
+    const tdTen = tr[i].getElementsByTagName('td')[1];
+    const tdGia = tr[i].getElementsByTagName('td')[2];
+    const tdDanhMuc = tr[i].getElementsByTagName('td')[3];
+    
+    if (tdMa && tdTen && tdGia && tdDanhMuc) {
+      const txtMa = tdMa.textContent || tdMa.innerText;
+      const txtTen = tdTen.textContent || tdTen.innerText;
+      const txtGia = tdGia.textContent || tdGia.innerText;
+      const txtDanhMuc = tdDanhMuc.textContent || tdDanhMuc.innerText;
+
+      if (
+        txtMa.toUpperCase().indexOf(filterMa) > -1 &&
+        txtTen.toUpperCase().indexOf(filterTen) > -1 &&
+        (filterGia === '' || parseInt(txtGia) >= parseInt(filterGia)) &&
+        (filterDanhMuc === '' || txtDanhMuc.toUpperCase().indexOf(filterDanhMuc) > -1)
+      ) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+    </script>
+  </body>
+
+</html>
